@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestApiCRUD.EmployeeRepository;
 using RestApiCRUD.Models;
 
 namespace RestApiCRUD.Controllers
-{   
+{
     /**
-     * 
+     * Employee Controller
      */
     [ApiController]
     public class EmployeeController : ControllerBase
     {   
 
-        private IEmployeeRepository employeeRepository;
+        private Repository.EmployeeRepository employeeRepository;
 
-        //Dependency Injection
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        /**
+         * Dependency Injection
+         */
+        public EmployeeController(Repository.EmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }
@@ -23,7 +24,7 @@ namespace RestApiCRUD.Controllers
         [Route("api/[controller]/list")]
         public IActionResult GetEmployees()
         {
-            return Ok(employeeRepository.GetEmployees());
+            return Ok(employeeRepository.GetAllEmployees());
         }
 
         [HttpGet]
@@ -80,7 +81,7 @@ namespace RestApiCRUD.Controllers
             }
 
             employee.Id = existingEmployee.Id;
-            employeeRepository.EditEmployee(employee);
+            employeeRepository.UpdateEmployee(employee);
 
             return employee;
         }

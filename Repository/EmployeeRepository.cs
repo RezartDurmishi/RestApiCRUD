@@ -1,10 +1,10 @@
 ﻿using RestApiCRUD.Models;
 
-namespace RestApiCRUD.EmployeeRepository
+namespace RestApiCRUD.Repository
 {
-    public interface IEmployeeRepository
+    public interface EmployeeRepository
     {
-        List<Employee> GetEmployees();
+        List<Employee> GetAllEmployees();
 
         Employee GetEmployee(long id);   
 
@@ -12,6 +12,6 @@ namespace RestApiCRUD.EmployeeRepository
 
         void DeleteEmployee(Employee employee);
         
-        Employee EditEmployee(Employee employee); 
+        Employee UpdateEmployee(Employee employee); 
     }
 }
