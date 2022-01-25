@@ -1,4 +1,4 @@
-﻿using RestApiCRUD.EmployeeData;
+﻿using RestApiCRUD.EmployeeRepository;
 using RestApiCRUD.Models;
 
 namespace RestApiCRUD.EmployeeRepository

@@ -1,6 +1,6 @@
 ﻿using RestApiCRUD.Models;
 
-namespace RestApiCRUD.EmployeeData
+namespace RestApiCRUD.EmployeeRepository
 {
     public interface IEmployeeRepository
     {
