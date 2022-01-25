@@ -1,32 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestApiCRUD.EmployeeData;
+using RestApiCRUD.EmployeeRepository;
 using RestApiCRUD.Models;
 
 namespace RestApiCRUD.Controllers
-{
+{   
+    /**
+     * 
+     */
     [ApiController]
     public class EmployeeController : ControllerBase
-    {
-        private IEmployeeRepository employeeData;
+    {   
+
+        private IEmployeeRepository employeeRepository;
 
         //Dependency Injection
-        public EmployeeController(IEmployeeRepository employeeData)
+        public EmployeeController(IEmployeeRepository employeeRepository)
         {
-            this.employeeData = employeeData;
+            this.employeeRepository = employeeRepository;
         }
 
         [HttpGet]
         [Route("api/[controller]/list")]
         public IActionResult GetEmployees()
         {
-            return Ok(employeeData.GetEmployees());
+            return Ok(employeeRepository.GetEmployees());
         }
 
         [HttpGet]
         [Route("api/[controller]/show/{id}")]
         public IActionResult GetEmployee(long id)
         {
-            var employee = employeeData.GetEmployee(id);
+            var employee = employeeRepository.GetEmployee(id);
 
             if (employee == null)
             {
@@ -42,7 +46,7 @@ namespace RestApiCRUD.Controllers
         public IActionResult CreateEmployee(Employee employee)
         {
 
-            employeeData.AddEmployee(employee);
+            employeeRepository.AddEmployee(employee);
             return Created(HttpContext.Request.Scheme + "://" +  HttpContext.Request.Host 
                 + HttpContext.Request.Path + "/" + employee.Id, employee);
         }
@@ -52,14 +56,14 @@ namespace RestApiCRUD.Controllers
         [Route("api/[controller]/delete/{id}")]
         public IActionResult DeleteEmployee(long id)
         {
-            Employee employee = employeeData.GetEmployee(id);
+            Employee employee = employeeRepository.GetEmployee(id);
 
             if(employee == null)
             {
                 return NotFound($"Employee with Id: {id} was not found!");  
             }
 
-            employeeData.DeleteEmployee(employee);
+            employeeRepository.DeleteEmployee(employee);
             return Ok($"Employee with id {id} was deleted!");
 
         }
@@ -68,7 +72,7 @@ namespace RestApiCRUD.Controllers
         [Route("api/[controller]/update/{id}")]
         public Employee EditEmployee(long id, Employee employee)
         {
-            Employee existingEmployee = employeeData.GetEmployee(id);
+            Employee existingEmployee = employeeRepository.GetEmployee(id);
 
             if (existingEmployee == null)
             {
@@ -76,7 +80,7 @@ namespace RestApiCRUD.Controllers
             }
 
             employee.Id = existingEmployee.Id;
-            employeeData.EditEmployee(employee);
+            employeeRepository.EditEmployee(employee);
 
             return employee;
         }
