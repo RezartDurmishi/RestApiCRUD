@@ -1,8 +1,8 @@
-﻿using RestApiCRUD.Models;
+﻿/*using RestApiCRUD.Models;
 
 namespace RestApiCRUD.EmployeeData
 {
-    public class MockEmployeeData : IEmployeeData
+    public class MockEmployeeRepository : IEmployeeRepository
     {
         private List<Employee> employees = new List<Employee>()
         {
@@ -20,17 +20,14 @@ namespace RestApiCRUD.EmployeeData
 
     public Employee AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteEmployee(Guid id)
-        {
-            throw new NotImplementedException();
+            employee.Id = Guid.NewGuid();
+            employees.Add(employee);
+            return employee;
         }
 
         public Employee GetEmployee(Guid id)
         {
-            throw new NotImplementedException();
+            return employees.SingleOrDefault(x => x.Id == id);
         }
 
         public List<Employee> GetEmployees()
@@ -38,9 +35,17 @@ namespace RestApiCRUD.EmployeeData
             return employees;
         }
 
-        public void UpdateEmployee(Employee employee)
+        public Employee EditEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            Employee existingEmployee = GetEmployee(employee.Id);
+            existingEmployee.Name = employee.Name;
+            return existingEmployee;
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            employees.Remove(employee);
         }
     }
 }
+*/
