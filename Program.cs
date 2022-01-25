@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using RestApiCRUD.EmployeeRepository;
-using RestApiCRUD.EmployeeRepository;
 using RestApiCRUD.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IEmployeeRepository, PostgreEmployeeRepository>();
+//builder.Services.AddScoped<EmployeeRepository, EmployeeService>();
 builder.Services.AddControllers();
 builder.Services.AddDbContextPool<EmployeeContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("employeesDB"))
