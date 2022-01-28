@@ -4,7 +4,7 @@ namespace RestApiCRUD.Models
 {
     public class EmployeeContext: DbContext
     {   
-        //shortcut: ctor + tab = constructor
+       
         public EmployeeContext(DbContextOptions<EmployeeContext> options): base(options)
         {
 
