@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IEmployeeRepository, PostgreEmployeeRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddControllers();
 builder.Services.AddDbContextPool<EmployeeContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("employeesDB"))
@@ -33,3 +33,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+app.UseDeveloperExceptionPage();

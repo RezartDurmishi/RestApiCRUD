@@ -8,10 +8,10 @@ namespace RestApiCRUD.EmployeeRepository
 
         Employee GetEmployee(long id);   
 
-        Employee AddEmployee(Employee employee);
+        Employee CreateEmployee(Employee employee);
 
         void DeleteEmployee(Employee employee);
         
-        Employee EditEmployee(Employee employee); 
+        Employee UpdateEmployee(Employee employee, long id); 
     }
 }

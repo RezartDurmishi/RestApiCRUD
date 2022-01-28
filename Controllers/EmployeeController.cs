@@ -46,9 +46,8 @@ namespace RestApiCRUD.Controllers
         public IActionResult CreateEmployee(Employee employee)
         {
 
-            employeeRepository.AddEmployee(employee);
-            return Created(HttpContext.Request.Scheme + "://" +  HttpContext.Request.Host 
-                + HttpContext.Request.Path + "/" + employee.Id, employee);
+            employeeRepository.CreateEmployee(employee);
+            return Ok(employee);
         }
 
 
@@ -70,19 +69,27 @@ namespace RestApiCRUD.Controllers
 
         [HttpPut]
         [Route("api/[controller]/update/{id}")]
-        public Employee EditEmployee(long id, Employee employee)
+        public IActionResult EditEmployee(long id, Employee employee)
         {
             Employee existingEmployee = employeeRepository.GetEmployee(id);
 
             if (existingEmployee == null)
             {
-                return null;
+                return NotFound($"Employee with id {id} is not found");
             }
 
-            employee.Id = existingEmployee.Id;
-            employeeRepository.EditEmployee(employee);
+            try
+            {
+                employeeRepository.DeleteEmployee(existingEmployee);
+                existingEmployee = employeeRepository.UpdateEmployee(employee, id);
+                return Ok(existingEmployee);
+            }
+            catch(Exception ex)
+            {
+                //LogException(ex);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
 
-            return employee;
         }
     }
 }
