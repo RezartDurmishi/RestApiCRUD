@@ -3,22 +3,29 @@ using RestApiCRUD.EmployeeRepository;
 using RestApiCRUD.Models;
 
 namespace RestApiCRUD.Controllers
-{   
+{
     /**
-     * 
+     * Employee Controller
      */
     [ApiController]
     public class EmployeeController : ControllerBase
-    {   
-
+    {
+        /**
+         * IEmployeeRepository instance
+         */
         private IEmployeeRepository employeeRepository;
 
-        //Dependency Injection
+        /**
+         * Dependency Injection
+         */
         public EmployeeController(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }
 
+        /**
+         * List employees
+         */
         [HttpGet]
         [Route("api/[controller]/list")]
         public IActionResult GetEmployees()
@@ -26,6 +33,9 @@ namespace RestApiCRUD.Controllers
             return Ok(employeeRepository.GetEmployees());
         }
 
+        /**
+         * Show employee
+         */
         [HttpGet]
         [Route("api/[controller]/show/{id}")]
         public IActionResult GetEmployee(long id)
@@ -40,7 +50,9 @@ namespace RestApiCRUD.Controllers
             return Ok(employee);
         }
 
-
+        /**
+         * Create employee
+         */
         [HttpPost]
         [Route("api/[controller]/create")]
         public IActionResult CreateEmployee(Employee employee)
@@ -50,7 +62,9 @@ namespace RestApiCRUD.Controllers
             return Ok(employee);
         }
 
-
+        /**
+         * Delete employee
+         */
         [HttpDelete]
         [Route("api/[controller]/delete/{id}")]
         public IActionResult DeleteEmployee(long id)
@@ -67,6 +81,9 @@ namespace RestApiCRUD.Controllers
 
         }
 
+        /**
+         * Update employee
+         */
         [HttpPut]
         [Route("api/[controller]/update/{id}")]
         public IActionResult EditEmployee(long id, Employee employee)
@@ -80,7 +97,6 @@ namespace RestApiCRUD.Controllers
 
             try
             {
-                employeeRepository.DeleteEmployee(existingEmployee);
                 existingEmployee = employeeRepository.UpdateEmployee(employee, id);
                 return Ok(existingEmployee);
             }

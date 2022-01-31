@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using RestApiCRUD.EmployeeRepository;
-using RestApiCRUD.EmployeeRepository;
 using RestApiCRUD.Models;
 
 var builder = WebApplication.CreateBuilder(args);

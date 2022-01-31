@@ -5,8 +5,14 @@ namespace RestApiCRUD.EmployeeRepository
 {
     public class EmployeeRepository : IEmployeeRepository
     {
+        /**
+         * EmployeeContext instance
+         */
         private EmployeeContext _employeeContext;
 
+        /**
+         * Dependency injection
+         */
         public EmployeeRepository(EmployeeContext employeeContext)
         {
             _employeeContext = employeeContext;
@@ -53,7 +59,8 @@ namespace RestApiCRUD.EmployeeRepository
         Employee IEmployeeRepository.UpdateEmployee(Employee employee, long id)
         {
             employee.Id = id;
-            _employeeContext.Employees.Add(employee);
+            _employeeContext.ChangeTracker.Clear();
+            _employeeContext.Employees.Update(employee);
             _employeeContext.SaveChanges();
             return employee;
         }
