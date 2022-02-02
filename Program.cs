@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContextPool<EmployeeContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("employeesDB"))
     );
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
