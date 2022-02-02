@@ -100,6 +100,7 @@ namespace RestApiCRUD.Controllers
                 existingEmployee = employeeRepository.UpdateEmployee(employee, id);
                 return Ok(existingEmployee);
             }
+            catch (Exception)
             catch(Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
