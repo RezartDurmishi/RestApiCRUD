@@ -101,7 +101,6 @@ namespace RestApiCRUD.Controllers
                 return Ok(existingEmployee);
             }
             catch (Exception)
-            catch(Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
